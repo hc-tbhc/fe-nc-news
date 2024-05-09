@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
 import { getArticlesById } from "../../api";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Comments from "./Comments";
 
 export default function Article() {
     const {id} = useParams();
     const [article, setArticle] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [errorMsg, setErrorMsg] = useState(null)
     
     useEffect(() => {
         getArticlesById(id)
@@ -16,38 +17,38 @@ export default function Article() {
             setIsLoading(false);
         })
         .catch((error) => {
-            return error;
+            if (error.response.status === 404) {
+                setErrorMsg('404: Not found')
+            }
+
+            if (error.response.status === 400) {
+                setErrorMsg('400: Bad request')
+            }
         })
     }, [])
 
-    // if (error) {
-    //     return <h1>{error}</h1>;
-    // }
+    if (errorMsg) {
+        return <h1>{errorMsg}</h1>
+    }
 
     return isLoading ? (
-        <h1>Loading...</h1>
+        <h2>Loading...</h2>
       ) : (
-        <div>
-            <h1 className="article-title">{article.title}</h1>
+        <div className="single-article">
+            <h2 className="article-title">{article.title}</h2>
             <Link to={``}>
                 <h2>{article.author}</h2>
             </Link>
-            <h2>{article.created_at}</h2>
-            <br></br>
-            <br></br>
+            <p>{article.created_at}</p>
             <img className="article-image" src={article.article_img_url} alt="Article Image"></img>
-            <br></br>
-            <br></br>
             <h2>{article.body}</h2>
-            <br></br>
-            <br></br>
-            <div className="vote">
+            <div className="article-vote">
                 <button>Like</button>
-                <h3>{article.votes}</h3>
                 <button>Dislike</button>
+                <h3>Votes: {article.votes}</h3>
             </div>
-            <br></br>
-            <br></br>
+            <h2 className="comments-header">Comments</h2>
+            <Comments id={id}/>
         </div>
       )
 }

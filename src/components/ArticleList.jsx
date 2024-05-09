@@ -16,10 +16,9 @@ export default function Articles() {
         <>
         {articles.map((article) => {
             return (
+            <Link to={`/articles/${article.article_id}`}>
                 <div className="article-card">
-                    <Link to={`/articles/${article.article_id}`}>
                     <h1>{article.title}</h1>
-                    </Link>
                     <div className="article-stats">
                     <Link to={``}>
                     <p>{article.author}</p>
@@ -28,6 +27,7 @@ export default function Articles() {
                     <p>Comments: {article.comment_count}</p>   
                     </div>
                 </div>
+            </Link>
             )
         })}
         </>
