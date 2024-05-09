@@ -6,19 +6,22 @@ function getArticles() {
     .then((result) => {
         return result.data;
     })
-    .catch(() => {
-        return Promise.reject();
-    })
 }
 
 function getArticlesById(id) {
-    return axios.get(`https://my-nc-news-e0va.onrender.com/api/articles/${id}`)
+    return axios
+    .get(`https://my-nc-news-e0va.onrender.com/api/articles/${id}`)
     .then((result) => {
         return result.data;
     })
-    .catch(() => {
-        return Promise.reject();
+}
+
+function getCommentsById(id) {
+    return axios
+    .get(`https://my-nc-news-e0va.onrender.com/api/articles/${id}/comments`)
+    .then((result) => {
+        return result.data;
     })
 }
 
-export { getArticles, getArticlesById }
+export { getArticles, getArticlesById, getCommentsById }
