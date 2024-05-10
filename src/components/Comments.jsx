@@ -13,13 +13,12 @@ export default function Comments({id, comments, setComments}) {
         .catch((error) => {
             if (error) {
                 setErrorMsg('Start the discussion!')
-
             }
         })
     }, [])
 
-    if (errorMsg) {
-        return <h1 className="empty-thread-msg">{errorMsg}</h1>
+    if (comments.length === 0) {
+        return <h2 className="empty-thread-msg">{errorMsg}</h2>
     }
 
     return (

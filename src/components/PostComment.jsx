@@ -3,6 +3,7 @@ import { postCommentToArticle } from "../../api";
 
 export default function PostComment({id, setComments}) {
     const [postStatus, setPostStatus] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null)
 
     function handleCommentPost(e) {
         e.preventDefault();
@@ -19,14 +20,13 @@ export default function PostComment({id, setComments}) {
                 return [response.comment, ...current] 
             })
         })
-        .catch((error) => {
-            console.log(error)
+        .catch(() => {
+            setErrorMsg('Invalid username');
         })
     }
 
-    const testComment = {
-        username: 'butter_bridge',
-        body: 'This is a comment'
+    if (errorMsg) {
+        alert(errorMsg)
     }
 
     return (
