@@ -27,7 +27,7 @@ export default function Comments({id}) {
             return (
                 <div className="comment">
                 <h2>{comment.author}</h2>
-                <h4>{comment.created_at}</h4>
+                <p>{comment.created_at}</p>
                 <h2 className="comment-body">{comment.body}</h2>
                 <div className="comment-vote">
                 <button className="vote-buttons">Like</button>

@@ -3,6 +3,7 @@ import { getArticlesById } from "../../api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Comments from "./Comments";
+import Vote from "./Vote";
 
 export default function Article() {
     const {id} = useParams();
@@ -42,11 +43,7 @@ export default function Article() {
             <p>{article.created_at}</p>
             <img className="article-image" src={article.article_img_url} alt="Article Image"></img>
             <h2>{article.body}</h2>
-            <div className="article-vote">
-                <button>Like</button>
-                <button>Dislike</button>
-                <h3>Votes: {article.votes}</h3>
-            </div>
+            <Vote id={id} articleVotes={article.votes}/>
             <h2 className="comments-header">Comments</h2>
             <Comments id={id}/>
         </div>
