@@ -12,10 +12,8 @@ export default function Vote({id, articleVotes}) {
             inc_votes: addToVote,
             article_id: id
         })
-        .then((result) => {
-            setNewVote(result.article.votes)
-        })
-        .catch((error) => {
+        .catch(() => {
+            setNewVote((voteToChange) => voteToChange - addToVote);
             setErrorMsg('Failed to vote')
         })
     }

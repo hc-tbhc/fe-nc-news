@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Comments from "./Comments";
 import Vote from "./Vote";
+import PostComment from "./PostComment";
 
 export default function Article() {
     const {id} = useParams();
     const [article, setArticle] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [errorMsg, setErrorMsg] = useState(null)
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [comments, setComments] = useState([]);
     
     useEffect(() => {
         getArticlesById(id)
@@ -45,7 +47,8 @@ export default function Article() {
             <h2>{article.body}</h2>
             <Vote id={id} articleVotes={article.votes}/>
             <h2 className="comments-header">Comments</h2>
-            <Comments id={id}/>
+            <PostComment id={id} setComments={setComments}/>
+            <Comments id={id} comments={comments} setComments={setComments}/>
         </div>
       )
 }

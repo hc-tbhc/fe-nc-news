@@ -57,7 +57,8 @@ body {
 .comment {
   border: 1px solid #595959;
   padding: 1em;
-  margin: 1em;
+  margin-top: 1em;
+  margin-right: 1em;
   transition: box-shadow 0.4s;
   padding-right:1%;
 }
@@ -72,10 +73,20 @@ body {
 .empty-thread-msg {
   border: 1px solid #595959;
   height: 16em;
-  text-align: center;
-  align-content: center;
+  padding: 1em;
+  margin-top: 1em;
+  margin-right: 1em;
 }
 
 .comments-header {
   font-size: 3.2em;
+}
+
+.submit-comment {
+  margin-top: 1em;
+  display: inline;
+}
+
+.comment-input {
+  margin-top: 1em;
 }
