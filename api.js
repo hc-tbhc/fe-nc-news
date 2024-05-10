@@ -32,5 +32,12 @@ function patchArticleVotes(id, inc_votes) {
     })
 }
 
+function postCommentToArticle(id, comment) {
+    return axios
+    .post(`https://my-nc-news-e0va.onrender.com/api/articles/${id}/comments`, comment)
+    .then((result) => {
+        return result.data;
+    })
+}
 
-export { getArticles, getArticlesById, getCommentsById, patchArticleVotes }
+export { getArticles, getArticlesById, getCommentsById, patchArticleVotes, postCommentToArticle }

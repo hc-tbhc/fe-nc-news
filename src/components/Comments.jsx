@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import { getCommentsById } from "../../api";
 
-export default function Comments({id}) {
-    const [comments, setComments] = useState([]);
+export default function Comments({id, comments, setComments}) {
     const [errorMsg, setErrorMsg] = useState(null)
 
     useEffect(() => {
         getCommentsById(id)
         .then((commentData) => {
             setComments(commentData.comments);
+            return <h2>Comment posted</h2>
         })
         .catch((error) => {
             if (error) {
                 setErrorMsg('Start the discussion!')
+
             }
         })
     }, [])
